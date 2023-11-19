@@ -3,7 +3,9 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import org.json.JSONObject;
 import org.json.JSONObject.*;
+
 import java.util.Arrays;
 
 public class DataProducer {

@@ -21,7 +21,7 @@ public class DataProducerRunner {
 
         // Set up the properties for the Kafka producer
         Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "your_kafka_cluster_bootstrap_servers"); // Replace with your Kafka cluster info
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092"); // My Kafka cluster info
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         // Add any additional producer configuration properties here

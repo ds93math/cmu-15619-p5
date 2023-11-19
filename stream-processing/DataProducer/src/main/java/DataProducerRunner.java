@@ -2,8 +2,19 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
+import java.util.List;
 
 public class DataProducerRunner {
+
+    public static class BlockIdPartitioner implements Partitioner {
+
+        @Override
+        public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+            int blockId = Integer.parseInt(key.toString()); // Assuming key is the blockId as a String
+            return Math.abs(blockId % 5); // Ensure a positive partition number
+        }
+
+    }
 
     public static void main(String[] args) throws Exception {
         /*
@@ -26,6 +37,8 @@ public class DataProducerRunner {
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092"); // My Kafka cluster info
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, BlockIdPartitioner.class.getName()); // Use partitioner based on BlockID
+
         // Add any additional producer configuration properties here
         
         // Create the Kafka producer

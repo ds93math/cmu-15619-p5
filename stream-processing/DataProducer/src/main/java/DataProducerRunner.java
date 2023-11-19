@@ -46,7 +46,7 @@ public class DataProducerRunner {
 
         // Set up the properties for the Kafka producer
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put("bootstrap.servers", "ec2-44-211-52-191.compute-1.amazonaws.com:9092");
         props.put("acks", "all");
         props.put("retries", 0);
         props.put("batch.size", 16384);

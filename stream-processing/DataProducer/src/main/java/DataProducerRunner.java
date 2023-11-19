@@ -49,7 +49,7 @@ public class DataProducerRunner {
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092"); // My Kafka cluster info
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, BlockIdPartitioner.class.getName()); // Use partitioner based on BlockID
+        //props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, BlockIdPartitioner.class.getName()); // Use partitioner based on BlockID
 
         // Add any additional producer configuration properties here
         

@@ -1,3 +1,8 @@
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.StringSerializer;
+import java.util.Properties;
+
 public class DataProducerRunner {
 
     public static void main(String[] args) throws Exception {
@@ -9,6 +14,28 @@ public class DataProducerRunner {
             - Implement the sendData method as required in DataProducer
             - Call the sendData method to start sending data
         */
-            
+        if (args.length < 1) {
+            throw new IllegalArgumentException("Please provide the trace file name as an argument.");
+        }
+        String traceFileName = args[0]; // The trace file name is expected as the first argument
+
+        // Set up the properties for the Kafka producer
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "your_kafka_cluster_bootstrap_servers"); // Replace with your Kafka cluster info
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        // Add any additional producer configuration properties here
+        
+        // Create the Kafka producer
+        KafkaProducer<String, String> producer = new KafkaProducer<>(props);
+
+        // Instantiate the DataProducer with the Kafka producer and trace file name
+        DataProducer dataProducer = new DataProducer(producer, traceFileName);
+
+        // Call sendData to start sending data
+        dataProducer.sendData();
+
+        // Close the producer
+        producer.close();
     }
 }

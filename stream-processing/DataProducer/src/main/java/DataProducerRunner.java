@@ -17,12 +17,12 @@ public class DataProducerRunner {
         }
         @Override
         public void close() {
-            // Close any resources if needed
+            //
         }
 
         @Override
         public void configure(Map<String, ?> configs) {
-            // Configure any additional properties if needed
+            //
         }
     }
 

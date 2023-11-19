@@ -33,8 +33,8 @@ public class DataProducer {
                 String type = json.getString("type");
                 String topic = determineTopic(type);
                 String key = String.valueOf(json.getInt("blockId")); // Partition based on blockId
-                
-                producer.send(new ProducerRecord<>(topic, key, line));
+                Integer my_partition = json.GetInteger("blockID") % 5;
+                producer.send(new ProducerRecord<>(topic, my_partition, key, line));
             }
         } catch (IOException e) {
             e.printStackTrace();

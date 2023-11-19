@@ -46,9 +46,19 @@ public class DataProducerRunner {
 
         // Set up the properties for the Kafka producer
         Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092"); // My Kafka cluster info
+        props.put("bootstrap.servers", "localhost:9092");
+        props.put("acks", "all");
+        props.put("retries", 0);
+        props.put("batch.size", 16384);
+        props.put("linger.ms", 1);
+        props.put("buffer.memory", 33554432);
+        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        
+        /*props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092"); // My Kafka cluster info
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        */
         //props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, BlockIdPartitioner.class.getName()); // Use partitioner based on BlockID
 
         // Add any additional producer configuration properties here

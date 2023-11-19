@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import org.json.JSONObject;
-//import org.json.JSONObjecttInt;
 
 import java.util.Arrays;
 
@@ -52,20 +51,4 @@ public class DataProducer {
             throw new IllegalArgumentException("Unknown type: " + type);
         }
     }
-
-   /* Determine field
-   private String determineTopic(String type) {
-        switch (type) {
-            case "DRIVER_LOCATION":
-                return "driver-locations";
-            case "LEAVING_BLOCK":
-            case "ENTERING_BLOCK":
-            case "RIDE_REQUEST":
-            case "RIDE_COMPLETE":
-                return "events";
-            default:
-                throw new IllegalArgumentException("Unknown type: " + type);
-        }
-   }
-   */
 }

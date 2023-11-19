@@ -1,32 +1,9 @@
-//import org.apache.kafka.clients.producer.Partitioner;
-//import org.apache.kafka.common.Cluster;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
-
 import java.util.Properties;
-//import java.util.List;
-//import java.util.Map;
 
 public class DataProducerRunner {
 
-/*    public static class BlockIdPartitioner implements Partitioner {
-
-        @Override
-        public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
-            int blockId = Integer.parseInt(key.toString()); // Assuming key is the blockId as a String
-            return Math.abs(blockId % 5); // Ensure a positive partition number
-        }
-        @Override
-        public void close() {
-            //
-        }
-
-        @Override
-        public void configure(Map<String, ?> configs) {
-            //
-        }
-    }
-*/
     public static void main(String[] args) throws Exception {
         /*
             Tasks to complete:
@@ -37,9 +14,10 @@ public class DataProducerRunner {
             - Call the sendData method to start sending data
         */
         String traceFileName = System.getenv("TRACE_FILENAME");
-        
-        if (traceFileName == null || traceFileName.isEmpty()) {
-            System.err.println("TRACE_FILENAME environment variable is not set.");
+        String traceFileName2 = System.getenv("TRACE2_FILENAME");
+
+        if (traceFileName2 == null || traceFileName2.isEmpty()) {
+            System.err.println("TRACE2_FILENAME environment variable is not set.");
             System.exit(1);
         }
 
@@ -53,30 +31,14 @@ public class DataProducerRunner {
         props.put("buffer.memory", 33554432);
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        
-        /*props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092"); // My Kafka cluster info
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        */
-        //props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, BlockIdPartitioner.class.getName()); // Use partitioner based on BlockID
-
-        // Add any additional producer configuration properties here
-        
+               
         // Create the Kafka producer
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
         // Instantiate the DataProducer with the Kafka producer and trace file name
-        DataProducer dataProducer = new DataProducer(producer, traceFileName);
+        DataProducer dataProducer = new DataProducer(producer, traceFileName2);
 
         // Call sendData to start sending data
         dataProducer.sendData();
-
-        // Register a shutdown hook to close the producer gracefully
-        /*
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("Shutting down...");
-            producer.close();
-        }));
-        */
     }
 }

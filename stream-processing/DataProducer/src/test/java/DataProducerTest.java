@@ -36,5 +36,6 @@ public class DataProducerTest {
                 new ProducerRecord<>("driver-locations", 4, null, "{\"blockId\":5649,\"type\":\"DRIVER_LOCATION\"}"));
 
         Assert.assertEquals("Producer records not matched!", expected, history);
+        System.out.println();
     }
 }

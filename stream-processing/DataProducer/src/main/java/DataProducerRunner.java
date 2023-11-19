@@ -14,10 +14,12 @@ public class DataProducerRunner {
             - Implement the sendData method as required in DataProducer
             - Call the sendData method to start sending data
         */
-        if (args.length < 1) {
-            throw new IllegalArgumentException("Please provide the trace file name as an argument.");
+        String traceFileName = System.getenv("TRACE_FILENAME");
+        
+        if (traceFileName == null || traceFileName.isEmpty()) {
+            System.err.println("TRACE_FILENAME environment variable is not set.");
+            System.exit(1);
         }
-        String traceFileName = args[0]; // The trace file name is expected as the first argument
 
         // Set up the properties for the Kafka producer
         Properties props = new Properties();
@@ -35,7 +37,11 @@ public class DataProducerRunner {
         // Call sendData to start sending data
         dataProducer.sendData();
 
-        // Close the producer
-        producer.close();
+        // Register a shutdown hook to close the producer gracefully
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Shutting down...");
+            dataProducer.close();
+            producer.close();
+        }));
     }
 }

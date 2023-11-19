@@ -15,7 +15,15 @@ public class DataProducerRunner {
             int blockId = Integer.parseInt(key.toString()); // Assuming key is the blockId as a String
             return Math.abs(blockId % 5); // Ensure a positive partition number
         }
+        @Override
+        public void close() {
+            // Close any resources if needed
+        }
 
+        @Override
+        public void configure(Map<String, ?> configs) {
+            // Configure any additional properties if needed
+        }
     }
 
     public static void main(String[] args) throws Exception {

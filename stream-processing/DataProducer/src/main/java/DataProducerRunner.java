@@ -3,8 +3,10 @@ import org.apache.kafka.common.Cluster;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
+
 import java.util.Properties;
 import java.util.List;
+import java.util.Map;
 
 public class DataProducerRunner {
 

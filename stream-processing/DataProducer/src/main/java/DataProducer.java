@@ -34,7 +34,7 @@ public class DataProducer {
                 JSONObject json = new JSONObject(line);
                 String type = json.getString("type");
                 String topic = determineTopic(type);
-                String key = null // String.valueOf(json.getInt("blockId")); // Partition based on blockId
+                String key = null; // String.valueOf(json.getInt("blockId")); // Partition based on blockId
                 Integer my_partition = json.getInt("blockId") % 5;
                 producer.send(new ProducerRecord<>(topic, my_partition, key, line));
             }

@@ -1,11 +1,11 @@
-import org.apache.kafka.clients.producer.Partitioner;
-import org.apache.kafka.common.Cluster;
+//import org.apache.kafka.clients.producer.Partitioner;
+//import org.apache.kafka.common.Cluster;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
 
 import java.util.Properties;
 //import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 
 public class DataProducerRunner {
 

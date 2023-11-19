@@ -63,9 +63,11 @@ public class DataProducerRunner {
         dataProducer.sendData();
 
         // Register a shutdown hook to close the producer gracefully
+        /*
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Shutting down...");
             producer.close();
         }));
+        */
     }
 }
